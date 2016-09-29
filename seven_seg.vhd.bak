@@ -1,0 +1,19 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+USE ieee.numeric_std.all;
+
+entity seven_seg is
+port(
+	data	:in		std_logic_vector( 3 downto 0);
+	segs	:out	std_logic_vector( 6 downto 0)
+	);
+end entity;
+	
+architecture rtl of seven_seg is
+
+
+begin
+
+
+
+end;
