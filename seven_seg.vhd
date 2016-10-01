@@ -10,10 +10,11 @@ port(
 end entity;
 	
 architecture rtl of seven_seg is
-	seven_seg: process(input)
+	begin
+	seven_seg: process(data)
 		begin
 		
-		case input is
+		case data is
 			when "0000" => -- 0
 				segs(0) <= '1';
 				segs(1) <= '1';
@@ -60,38 +61,38 @@ architecture rtl of seven_seg is
 				segs(6) <= '1'; --g
 
 			when "0101" => -- 5
-				segs(0) <= '0'; --a
-				segs(1) <= '1'; --b
+				segs(0) <= '1'; --a
+				segs(1) <= '0'; --b
 				segs(2) <= '1'; --c
-				segs(3) <= '0'; --d
+				segs(3) <= '1'; --d
 				segs(4) <= '0'; --e
 				segs(5) <= '1'; --f
 				segs(6) <= '1'; --g
 				
 			when "0110" => -- 6
-				segs(0) <= '0'; --a
-				segs(1) <= '1'; --b
+				segs(0) <= '1'; --a
+				segs(1) <= '0'; --b
 				segs(2) <= '1'; --c
-				segs(3) <= '0'; --d
-				segs(4) <= '0'; --e
+				segs(3) <= '1'; --d
+				segs(4) <= '1'; --e
 				segs(5) <= '1'; --f
 				segs(6) <= '1'; --g
 				
 			when "0111" => -- 7
-				segs(0) <= '0'; --a
+				segs(0) <= '1'; --a
 				segs(1) <= '1'; --b
 				segs(2) <= '1'; --c
-				segs(3) <= '0'; --d
+				segs(3) <= '1'; --d
 				segs(4) <= '0'; --e
-				segs(5) <= '1'; --f
-				segs(6) <= '1'; --g
+				segs(5) <= '0'; --f
+				segs(6) <= '0'; --g
 				
 			when "1000" => -- 8
-				segs(0) <= '0'; --a
+				segs(0) <= '1'; --a
 				segs(1) <= '1'; --b
 				segs(2) <= '1'; --c
-				segs(3) <= '0'; --d
-				segs(4) <= '0'; --e
+				segs(3) <= '1'; --d
+				segs(4) <= '1'; --e
 				segs(5) <= '1'; --f
 				segs(6) <= '1'; --g
 				
@@ -105,9 +106,5 @@ architecture rtl of seven_seg is
 				segs(6) <= '1'; --g
 				
 			end case;
-
-begin
-
-
-
-end;
+	end process seven_seg;
+end rtl;
