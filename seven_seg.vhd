@@ -97,7 +97,7 @@ architecture rtl of seven_seg is
 				segs(6) <= '1'; --g
 				
 			when "1001" => -- 9
-				segs(0) <= '0'; --a
+				segs(0) <= '1'; --a
 				segs(1) <= '1'; --b
 				segs(2) <= '1'; --c
 				segs(3) <= '0'; --d
