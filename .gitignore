@@ -1,0 +1,17 @@
+#  cat .gitignore
+*.rpt
+*.chg
+*.log
+*.htm
+*.eqn
+*.pin
+*.sof
+*.pof
+*.summary
+*.done
+*.smsg
+*.qws
+*.jdi
+*.qsf
+*.qdf
+*db
