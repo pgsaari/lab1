@@ -12,6 +12,5 @@
 *.smsg
 *.qws
 *.jdi
-*.qsf
-*.qdf
+*.bak
 *db
