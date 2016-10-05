@@ -10,6 +10,7 @@ architecture behav of gen_counter_tb is
 
 constant  WIDE:positive := 4;
 constant  MAX:positive  := 9;
+constant  CODE:positive := 1;
 
 constant CLK_PER:time := 20 ns;
 
@@ -17,7 +18,8 @@ constant CLK_PER:time := 20 ns;
 component gen_counter is
 generic (
 		wide :positive; -- how many bits is the counter
-		max :positive   -- what is the max value of the counter ( modulus )
+		max :positive;   -- what is the max value of the counter ( modulus )
+		code :positive := 3
 		);
 port (
 		clk		:in	std_logic; -- system clock
@@ -26,7 +28,8 @@ port (
 		enable	:in std_logic; -- clock enable
 		reset	:in std_logic; -- reset to zeros use i_count <= (others => '0' ) since size depends on generic
 		count	:out std_logic_vector( wide-1 downto 0 ); -- count out
-		term	:out std_logic -- maximum count is reached
+		term	:out std_logic; -- maximum count is reached
+		setEnable: in std_logic_vector(1 downto 0)
 		);
 	end component;
 	
@@ -37,6 +40,7 @@ port (
 	signal  reset 	:std_logic;
 	signal count 	:std_logic_vector(WIDE-1 downto 0);
 	signal term 	:std_logic;
+	signal setEnable : std_logic_vector(1 downto 0);
 	
 	begin
 	
@@ -89,7 +93,8 @@ port (
 		dut :gen_counter
 generic map (
 		wide => WIDE,
-		max => MAX
+		max => MAX,
+		code => CODE
 		)
 port map (
 		clk		=> clk,
@@ -98,7 +103,8 @@ port map (
 		enable	=> enable,
 		reset	=> reset,
 		count	=> count,
-		term	=> term
+		term	=> term,
+		setEnable => "01"
 		);
 		
 end architecture;
