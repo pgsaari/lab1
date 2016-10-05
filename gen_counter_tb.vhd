@@ -31,7 +31,7 @@ port (
 	end component;
 	
 	signal  clk 	:std_logic;
-	signal  ldata 	:std_logic_vector(WIDE-1 downto 0);
+	signal  data 	:std_logic_vector(WIDE-1 downto 0);
 	signal  load 	:std_logic;
 	signal  enable 	:std_logic;
 	signal  reset 	:std_logic;
@@ -52,7 +52,7 @@ port (
 	
 	vectors:process begin
 	
-		ldata <= 	"0011";
+		data <= 	"0011";
 		load <=		'0';
 		enable <= 	'0';
 		reset <= 	'1';
@@ -60,6 +60,30 @@ port (
 		
 		-- add more vectors to test everything
 		
+		data <= 	"0011";
+		load <=		'1';
+		enable <= 	'0';
+		reset <= 	'0';
+		wait for 2*CLK_PER;
+
+		data <= 	"0011";
+		load <=		'0';
+		enable <= 	'1';
+		reset <= 	'0';
+		wait for 15*CLK_PER;
+
+		data <= 	"0011";
+		load <=		'0';
+		enable <= 	'0';
+		reset <= 	'1';
+		wait for 5*CLK_PER;
+
+		data <= 	"0011";
+		load <=		'0';
+		enable <= 	'1';
+		reset <= 	'0';
+		wait for 20*CLK_PER;
+
 		end process;
 		
 		dut :gen_counter
@@ -69,7 +93,7 @@ generic map (
 		)
 port map (
 		clk		=> clk,
-		data	=> ldata,
+		data	=> data,
 		load	=> load,
 		enable	=> enable,
 		reset	=> reset,
