@@ -104,7 +104,14 @@ architecture rtl of seven_seg is
 				segs(4) <= '0'; --e
 				segs(5) <= '1'; --f
 				segs(6) <= '1'; --g
-				
+			when others => --others
+				segs(0) <= '0'; --a
+				segs(1) <= '0'; --b
+				segs(2) <= '0'; --c
+				segs(3) <= '0'; --d
+				segs(4) <= '0'; --e
+				segs(5) <= '0'; --f
+				segs(6) <= '0'; --g
 			end case;
 	end process seven_seg;
 end rtl;
