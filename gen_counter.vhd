@@ -44,7 +44,7 @@ end process;
 -- I always like to use a seperate process to generate the terminal count
 chk: process (i_count) begin
 		-- if-then-else statements to generate terminal count go here
-	if (i_count mod max = 0) then -- count mod max = 0 means max value reached
+	if (i_count = max) then --max value reached
 		i_term <= '1'; -- set term to indicate counter at max
 	else
 		i_term <= '0'; -- set term to indicate counter not at max	
