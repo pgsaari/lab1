@@ -26,12 +26,16 @@ Port(
 
 
 --///////// LEDR /////////
-   LEDR		:out	std_logic_vector( 17 downto 0);	 --LED Red[17:0]
+   --LEDR		:out	std_logic_vector( 17 downto 0);	 --LED Red[17:0]
 -- ////////////////////////	Push Button		////////////////////////
 	KEY			:in		std_logic_vector( 3 downto 0);	--Pushbutton[3:0]
 	
 --////////////////////////	DPDT Switch		////////////////////////
 	SW			:in		std_logic_vector( 9 downto 0 ) --Toggle Switch[17:0]
+	
+--///////////////////////// LOAD/RESET BUTTONS////////////////////////
+	LD : IN std_logic;
+	RT : IN std_logic;
      
     
 
@@ -44,8 +48,13 @@ architecture struct of DE1_top is
 
 -- any declarations??
 
-signal 		clk_en	    :std_logic;
+signal 		clk_en	 :std_logic;
 signal 		term1	    :std_logic;
+signal 		term11	 :std_logic;
+signal 		term2	    :std_logic;
+signal 		term22	 :std_logic;
+signal 		term3	    :std_logic;
+signal 		term33	 :std_logic;
 
 
 
@@ -61,20 +70,63 @@ port (
 		enable	:in std_logic;
 		reset	:in std_logic;
 		count	:out std_logic_vector( wide-1 downto 0 );
-		term	:out std_logic
+		term	:out std_logic;
+		setEnable : in std_logic_vector(3 downto 0)
 		);
 	end component;
 
 begin
 
-	
+------ seven_seg 
+COMPONENT seven_seg is Port(
+	data	:in		std_logic_vector( 3 downto 0);
+	segs	:out	std_logic_vector( 6 downto 0)
+); END COMPONENT;
+
+-------------TIE count to hex display-------------
+SIGNAL s1, s10, m1, m10, h1, h10 : UNSIGNED(3 DOWNTO 0);
+
+----------------------------------------------------	
+clkd : seven_seg port map (
+		data => s1;
+		segs => HEX0
+);
+
+clkd : seven_seg port map (
+		data => s10;
+		segs => HEX1
+);
+
+clkd : seven_seg port map (
+		data => m1;
+		segs => HEX2
+);
+
+clkd : seven_seg port map (
+		data => m10;
+		segs => HEX3
+);
+
+clkd : seven_seg port map (
+		data => h1;
+		segs => HEX4
+);
+
+clkd : seven_seg port map (
+		data => h10;
+		segs => HEX5
+);
+
+
+-----------------------------------------------------
 	LEDR(16) <= clk_en;
 
 -- first use an instance of counter to get clock enable 
 clkd :gen_counter
 generic map (
 		wide => 28,
-		max => 50000000
+		max => 50000000,
+		code => 3
 		)
 port map (
 		clk		=> CLOCK_50,
@@ -83,34 +135,120 @@ port map (
 		enable	=> '1',
 		reset	=> '0',
 		count	=> open,
-		term	=> clk_en
+		term	=> clk_en,
+		setEnable => open
 		);
 
--- for your clock design, this will count the seconds				
+-- for your clock design, this will count the first seconds bit		
 cnt1:gen_counter 
 generic map (
 		wide => 4,
-		max => 5
+		max => 9,
+		code => 0
 		)
 port map (
 		clk		=> CLOCK_50,
 		data	=> SW(3 downto 0),
-		load	=> SW(9),
+		load	=> LD,
 		enable	=> clk_en,
-		reset	=> SW(8),
-		count	=> LEDR( 3 downto 0),
-		term	=> term1
+		reset	=> RT,
+		count	=> s1,
+		term	=> term1,
+		setEnable => sw ( 9 downto 8)
 		);
 	
+-- for your clock design, this will count the second seconds bit			
+cnt11:gen_counter 
+generic map (
+		wide => 4,
+		max => 5,
+		code => 0
+		)
+port map (
+		clk		=> CLOCK_50,
+		data	=> SW(7 downto 4),
+		load	=> LD,
+		enable	=> clk_en,
+		reset	=> RT,
+		count	=> s10,
+		term	=> term11,
+		setEnable => sw ( 9 downto 8)
+		);
+		
+-- for your clock design, this will count the first minutes bit
+cnt2:gen_counter 
+generic map (
+		wide => 4,
+		max => 9,
+		code => 1
+		)
+port map (
+		clk		=> CLOCK_50,
+		data	=> SW(3 downto 0),
+		load	=> LD,
+		enable	=> clk_en,
+		reset	=> RT,
+		count	=> m1,
+		term	=> term2,
+		setEnable => sw ( 9 downto 8)
+		);	
+
+	-- for your clock design, this will count the second minutes bit			
+cnt22:gen_counter 
+generic map (
+		wide => 4,
+		max => 5,
+		code => 1
+		)
+port map (
+		clk		=> CLOCK_50,
+		data	=> SW(7 downto 4),
+		load	=> LD,
+		enable	=> clk_en,
+		reset	=> RT,
+		count	=> m10,
+		term	=> term22,
+		setEnable => sw ( 9 downto 8)
+		);	
+		
+-- for your clock design, this will count the hours				
+cnt3:gen_counter 
+generic map (
+		wide => 4,
+		max => 2,
+		code => 2
+		)
+port map (
+		clk		=> CLOCK_50,
+		data	=> SW(3 downto 0),
+		load	=> LD,
+		enable	=> clk_en,
+		reset	=> RT,
+		count	=> h1,
+		term	=> term3,
+		setEnable => sw ( 9 downto 8)
+		);	
+		
+-- for your clock design, this will count the second hours bit			
+cnt33:gen_counter 
+generic map (
+		wide => 4,
+		max => 1,
+		code => 2
+		)
+port map (
+		clk		=> CLOCK_50,
+		data	=> SW(7 downto 4),
+		load	=> LD,
+		enable	=> clk_en,
+		reset	=> RT,
+		count	=> h2,
+		term	=> term33,
+		setEnable => sw ( 9 downto 8)
+		);	
+		
 	LEDR(17) <= term1;
 
 
 end;
-
-
-
-
-
-
-
 
