@@ -47,14 +47,14 @@ architecture struct of DE1_top is
 
 -- any declarations??
 
-signal 		clk_en	 :std_logic;
-signal 		term1	    :std_logic;
-signal 		term2	 :std_logic;
-signal 		term3	    :std_logic;
-signal 		term4	 :std_logic;
-signal 		term5	    :std_logic;
-signal 		term6	 :std_logic;
-signal		term7 : std_logic;
+signal 		clk_en	 :std_logic := '1';
+signal 		term1	    :std_logic := '0';
+signal 		term2	 :std_logic := '0';
+signal 		term3	    :std_logic := '0';
+signal 		term4	 :std_logic := '0';
+signal 		term5	    :std_logic := '0';
+signal 		term6	 :std_logic := '0';
+signal		term7 : std_logic := '0';
 
 
 component gen_counter is
@@ -76,7 +76,13 @@ port (
 	end component;
 	
 	-------------TIE count to hex display-------------
-SIGNAL s1, s10, m1, m10, h1, h10 : std_logic_vector(3 DOWNTO 0);
+SIGNAL s1 : std_logic_vector(3 DOWNTO 0) := "0000";
+SIGNAL s10 : std_logic_vector(3 DOWNTO 0) := "0000";
+SIGNAL m1 : std_logic_vector(3 DOWNTO 0) := "0000";
+SIGNAL m10 : std_logic_vector(3 DOWNTO 0) := "0000";
+SIGNAL h1 : std_logic_vector(3 DOWNTO 0) := "0010";
+SIGNAL h10 : std_logic_vector(3 DOWNTO 0) := "0001";
+
 
 	------ seven_seg 
 COMPONENT seven_seg is Port(
