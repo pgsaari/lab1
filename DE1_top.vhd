@@ -47,7 +47,7 @@ architecture struct of DE1_top is
 
 -- any declarations??
 
-signal 		clk_en	 :std_logic := '1';
+signal 		clk_en	 :std_logic := '0';
 signal 		term1	    :std_logic := '0';
 signal 		term2	 :std_logic := '0';
 signal 		term3	    :std_logic := '0';
@@ -130,7 +130,6 @@ hxx5 : seven_seg port map (
 
 
 -----------------------------------------------------
-	--LEDR(16) <= clk_en;
 
 -- first use an instance of counter to get clock enable 
 clkd :gen_counter
@@ -226,7 +225,7 @@ port map (
 cnt3:gen_counter 
 generic map (
 		wide => 4,
-		max => 2,
+		max => 3,
 		code => 3
 		)
 port map (
@@ -244,7 +243,7 @@ port map (
 cnt33:gen_counter 
 generic map (
 		wide => 4,
-		max => 1,
+		max => 2,
 		code => 3
 		)
 port map (
@@ -258,8 +257,4 @@ port map (
 		setEnable => sw ( 9 downto 8)
 		);	
 		
-	--LEDR(17) <= term1;
-
-
 end;
-

@@ -44,13 +44,14 @@ cnt: process( clk ) begin
 end process;
 
 -- I always like to use a seperate process to generate the terminal count
-chk: process (i_count) begin
+chk: process (i_count, enable) begin
 		-- if-then-else statements to generate terminal count go here
-	if (i_count = max) then --max value reached
-		i_term <= '1'; -- set term to indicate counter at max
-	else
-		i_term <= '0'; -- set term to indicate counter not at max	
-	end if;
+	
+		if (i_count = max AND enable = '1') then --max value reached
+			i_term <= '1'; -- set term to indicate counter at max
+		else
+			i_term <= '0'; -- set term to indicate counter not at max	
+		end if;
 		
 end process;
 
