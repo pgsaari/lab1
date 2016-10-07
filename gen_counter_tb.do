@@ -27,4 +27,4 @@ add wave -radix binary /enable
 add wave -radix binary /reset
 add wave -radix unsigned /count
 add wave -radix binary /term
-run 400 ns
+run 1000 ns

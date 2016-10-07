@@ -10,7 +10,7 @@ architecture behav of gen_counter_tb is
 
 constant  WIDE:positive := 4;
 constant  MAX:positive  := 9;
-constant  CODE:positive := 1;
+constant  CODE:positive := 1; -- select this counter for set and load
 
 constant CLK_PER:time := 20 ns;
 
@@ -56,37 +56,49 @@ port (
 	
 	vectors:process begin
 	
+	    -- test reset then wait 
 		data <= 	"0011";
 		load <=		'0';
 		enable <= 	'0';
 		reset <= 	'1';
-		wait for 5*CLK_PER;
+		wait for 3*CLK_PER;
 		
-		-- add more vectors to test everything
-		
+		-- test load 3
 		data <= 	"0011";
 		load <=		'1';
 		enable <= 	'0';
 		reset <= 	'0';
-		wait for 2*CLK_PER;
+		wait for 3*CLK_PER;
 
+		-- test enable clock to count up to 9 from 3
 		data <= 	"0011";
 		load <=		'0';
 		enable <= 	'1';
 		reset <= 	'0';
 		wait for 15*CLK_PER;
 
-		data <= 	"0011";
-		load <=		'0';
-		enable <= 	'0';
-		reset <= 	'1';
-		wait for 5*CLK_PER;
+		-- load 5 while clock is enabled
+		data <= 	"0101";
+		load <=		'1';
+		enable <= 	'1';
+		reset <= 	'0';
+		wait for 3*CLK_PER;
 
-		data <= 	"0011";
+		-- let clock count up from 5
+		data <= 	"0101";
 		load <=		'0';
 		enable <= 	'1';
 		reset <= 	'0';
-		wait for 20*CLK_PER;
+		wait for 10*CLK_PER;
+
+		-- disable clock
+		data <= 	"0101";
+		load <=		'0';
+		enable <= 	'0';
+		reset <= 	'0';
+		wait for 10*CLK_PER;
+
+
 
 		end process;
 		
@@ -104,7 +116,7 @@ port map (
 		reset	=> reset,
 		count	=> count,
 		term	=> term,
-		setEnable => "01"
+		setEnable => "01" -- matches the 'code' so we can set and load this counter
 		);
 		
 end architecture;

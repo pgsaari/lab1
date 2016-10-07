@@ -9,7 +9,7 @@ z2
 cModel Technology
 Z0 dC:/Users/Paul/Documents/Homework/Digital_Logic_Lab/lab_01
 Egen_counter
-Z1 w1475629904
+Z1 w1475718457
 Z2 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
 Z3 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
 Z4 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
@@ -22,9 +22,9 @@ V6T9K?7;Dn8[Qz>5fY`kzS1
 !s100 N07LeWTL3=e_>AaK7o4XE0
 Z7 OV;C;10.4d;61
 32
-Z8 !s110 1475637263
+Z8 !s110 1475797685
 !i10b 1
-Z9 !s108 1475637263.000000
+Z9 !s108 1475797684.000000
 Z10 !s90 -reportprogress|300|gen_counter.vhd|gen_counter_tb.vhd|
 Z11 !s107 gen_counter_tb.vhd|gen_counter.vhd|
 !i113 1
@@ -36,8 +36,8 @@ R4
 Z13 DEx4 work 11 gen_counter 0 22 6T9K?7;Dn8[Qz>5fY`kzS1
 l28
 L23
-Z14 Vkd@8l82__HdLA?P]OaM]N2
-Z15 !s100 ?iUE`=A?8iU<1j0Z5ZMn_2
+Z14 V5OT<7>M1:;<F9TI[Q2>;A0
+Z15 !s100 ;XGb5F]QNbGajkoonMEO]2
 R7
 32
 R8
@@ -48,7 +48,7 @@ R11
 !i113 1
 R12
 Egen_counter_tb
-Z16 w1475637256
+Z16 w1475797677
 R2
 R3
 R4
@@ -75,8 +75,8 @@ R4
 Z19 DEx4 work 14 gen_counter_tb 0 22 PmamfUX4@g2f;`_bP292[3
 l45
 L9
-Vjh[VJ?ETJG80Z6g2dXU7m1
-!s100 e`GH=Omb=>;hj7TEfS5QQ3
+V;SZ?k3=zjnHSK4@=^ElnQ3
+!s100 ZULQiiNL;=9aAic^;[bkm2
 R7
 32
 R8
